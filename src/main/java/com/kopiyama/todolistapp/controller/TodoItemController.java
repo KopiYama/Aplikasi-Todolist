@@ -16,28 +16,23 @@ public class TodoItemController {
     private TodoItemService todoItemService;
 
     @GetMapping
-    public List<TodoItem> getAllTodoItems(){
-        return todoItemService.getAllTodoItems();
+    public List<TodoItem> getAllTodoItems(@RequestParam(value = "status", required = false) Boolean status) {
+        return todoItemService.getAllTodoItems(status);
     }
 
     @PostMapping
-    public TodoItem createTodoItem(@RequestBody TodoItem todoItem){
+    public TodoItem createTodoItem(@RequestBody TodoItem todoItem) {
         return todoItemService.createTodoItem(todoItem);
     }
 
     @PutMapping("/{id}")
-    public TodoItem updateTodoItem(@PathVariable Long id, @RequestBody TodoItem todoItemDetails){
+    public TodoItem updateTodoItem(@PathVariable Long id, @RequestBody TodoItem todoItemDetails) {
         return todoItemService.updateTodoItem(id, todoItemDetails);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteTodoItem(@PathVariable Long id){
+    public ResponseEntity<?> deleteTodoItem(@PathVariable Long id) {
         todoItemService.deleteTodoItem(id);
         return ResponseEntity.ok().build();
     }
-//    @GetMapping
-//    public String helloWorld(){
-////        return "Belajar Buat aplikasi";
-//    }
-
 }
